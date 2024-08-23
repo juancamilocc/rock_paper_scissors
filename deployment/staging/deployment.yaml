@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rps-game
+  namespace: rps-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rps-game
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: rps-game
+    spec:
+      containers:
+      - name: rps-game
+        image: juancamiloccc/rps-game:v0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8085
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
