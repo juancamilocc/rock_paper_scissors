@@ -1,7 +1,8 @@
 pipeline {
     agent {
         kubernetes {
-        cloud 'kubernetes-staging'    
+        cloud 'kubernetes-staging'
+        jenkinsUrl 'http://jenkins-service:8080'
         defaultContainer 'jnlp'
         yaml """
 apiVersion: v1
