@@ -21,10 +21,10 @@ spec:
       resources:
         limits:
           memory: "2Gi"
-          cpu: "500m"
+          cpu: "750m"
         requests:
           memory: "1Gi"
-          cpu: "250m"
+          cpu: "500m"
       volumeMounts:
         - name: docker-graph-storage
           mountPath: /var/lib/docker
