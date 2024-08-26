@@ -20,11 +20,11 @@ spec:
         privileged: true
       resources:
         limits:
-          memory: "2Gi"
-          cpu: "500m"
+          memory: "1Gi"
+          cpu: "300m"
         requests:
           memory: "1Gi"
-          cpu: "250m"
+          cpu: "150m"
       volumeMounts:
         - name: docker-graph-storage
           mountPath: /var/lib/docker
@@ -35,10 +35,10 @@ spec:
             containerTemplate {
             name 'jnlp'
             image 'jenkins/inbound-agent'
-            resourceRequestCpu '256m'
-            resourceRequestMemory '500Mi'
-            resourceLimitCpu '512m'
-            resourceLimitMemory '1000Mi'
+            resourceRequestCpu '128m'
+            resourceRequestMemory '250Mi'
+            resourceLimitCpu '256m'
+            resourceLimitMemory '500Mi'
             }
         }
     }
