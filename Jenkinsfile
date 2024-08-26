@@ -62,7 +62,7 @@ spec:
 
                                 withCredentials([usernamePassword(credentialsId: 'credentials-dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                                     sh '''
-                                        echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin iad.ocir.io'                        
+                                        echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin'                        
                                         docker build -t juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging .
                                         docker push juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging
                                     '''
