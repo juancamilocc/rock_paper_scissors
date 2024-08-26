@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: rps-game
-        image: juancamiloccc/rps-game:5bea06c-2024-08-26-10-53-24-staging
+        image: juancamiloccc/rps-game:075d3bb-2024-08-26-12-06-57-staging
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8085
