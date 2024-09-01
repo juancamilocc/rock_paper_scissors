@@ -111,7 +111,8 @@ spec:
     }
     post {
         success {
-            echo "SUCCESS"    
+            slackSend channel: 'jenkins-notifications',
+                message: "Build ${currentBuild.currentResult} for pipeline ${env.JOB_NAME} build #${env.BUILD_NUMBER} ${BUILD_URL}"   
         }
         failure {
             echo "FAILURE"
