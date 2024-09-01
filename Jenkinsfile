@@ -48,6 +48,7 @@ spec:
         MANIFEST = 'deployment.yaml' 
         IMAGE_TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         DATE = sh(script: 'TZ="America/Bogota" date "+%Y-%m-%d-%H-%M-%S"', returnStdout: true).trim()
+        LAST_CHANGE = sh(script: 'git log -1 --name-status --pretty=format:"%h %s"', returnStdout: true).trim()
         RETRY_COUNTS = 2
     }
     stages {
@@ -111,11 +112,56 @@ spec:
     }
     post {
         success {
-            slackSend channel: 'jenkins-notifications',
-                message: "Build ${currentBuild.currentResult} for pipeline ${env.JOB_NAME} build #${env.BUILD_NUMBER} ${BUILD_URL}"   
+            slackSend(
+                channel: 'jenkins-notifications',
+                color: '#00FF00',
+                message: "Build of Rock Paper Scissors was successful!",
+                attachments: [
+                    [
+                        title: "Build of Rock Paper Scissors was successful!",
+                        text: "Build details",
+                        fields: [
+                            [title: "Date", value: "${DATE}", short: true],
+                            [title: "Status", value: "Success", short: true],
+                            [title: "Changes made by", value: "camilocolorado44@gmail.com", short: true],
+                            [title: "Last Merge/commit", value: "${LAST_CHANGE}", short: true],
+                            [title: "Project Tag", value: "rps-game:${IMAGE_TAG}-${DATE}-staging", short: true]
+                        ],
+                        footer: "Jenkins",
+                        ts: ${BUILD_TIMESTAMP},
+                        color: "#36a64f"
+                    ]
+                ]
+            )   
         }
         failure {
-            echo "FAILURE"
+            script {
+
+                sh 'echo "Example file .txt" > exampleFile.txt'
+                
+                slackSend (
+                channel: 'jenkins-notifications',
+                color: '#00FF00',
+                message: "Build of Rock Paper Scissors failed!",
+                attachments: [
+                    [
+                        title: "Build of Rock Paper Scissors failed!",
+                        text: "Build details",
+                        fields: [
+                            [title: "Date", value: "${DATE}", short: true],
+                            [title: "Status", value: "Failure", short: true],
+                            [title: "Changes made by", value: "camilocolorado44@gmail.com", short: true],
+                            [title: "Last Merge/commit", value: "${LAST_CHANGE}", short: true]
+                        ],
+                        footer: "Jenkins",
+                        ts: ${BUILD_TIMESTAMP},
+                        color: "#36a64f"
+                    ]
+                ]
+            )
+
+            slackUploadFile(channel: 'jenkins-notifications', filePath: 'exampleFile.txt', initialComment: 'Result build file')   
+            }
         }
     }
 }
