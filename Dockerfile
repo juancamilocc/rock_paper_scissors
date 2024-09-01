@@ -6,7 +6,7 @@ COPY go.mod ./
 RUN go mod download
 
 COPY . .
-COPY templat/ templates/
+COPY templates/ templates/
 COPY static/ static/
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /rock_paper_scissors
