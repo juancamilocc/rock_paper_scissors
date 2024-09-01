@@ -128,7 +128,7 @@ spec:
                             [title: "Project Tag", value: "rps-game:${IMAGE_TAG}-${DATE}-staging", short: true]
                         ],
                         footer: "Jenkins",
-                        ts: ${BUILD_TIMESTAMP},
+                        ts: env.BUILD_TIMESTAMP,
                         color: "#36a64f"
                     ]
                 ]
@@ -154,7 +154,7 @@ spec:
                             [title: "Last Merge/commit", value: "${LAST_CHANGE}", short: true]
                         ],
                         footer: "Jenkins",
-                        ts: ${BUILD_TIMESTAMP},
+                        ts: env.BUILD_TIMESTAMP,
                         color: "#36a64f"
                     ]
                 ]
