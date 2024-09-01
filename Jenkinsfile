@@ -63,7 +63,7 @@ spec:
                                 withCredentials([usernamePassword(credentialsId: 'credentials-dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                                     sh '''
                                         echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin                      
-                                        docker build -t juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging 
+                                        docker build -t juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging . 2> logs-docker.txt
                                         docker push juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging
                                     '''
                                 }
@@ -137,7 +137,7 @@ spec:
         failure {
             script {
 
-                sh 'echo "Example file .txt" > exampleFile.txt'
+                def logsBuild = readFile('logs-docker.txt') 
                 
                 slackSend (
                 channel: 'jenkins-notifications',
@@ -155,12 +155,12 @@ spec:
                         ],
                         footer: "Jenkins",
                         ts: env.BUILD_TIMESTAMP,
-                        color: "#36a64f"
+                        color: "#ff0000"
                     ]
                 ]
             )
 
-            slackUploadFile(channel: 'jenkins-notifications', filePath: 'exampleFile.txt', initialComment: 'Result build file')   
+            slackUploadFile(channel: 'jenkins-notifications', filePath: 'logs-docker.txt', initialComment: 'Logs Build')   
             }
         }
     }
