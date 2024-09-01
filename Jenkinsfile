@@ -137,6 +137,7 @@ spec:
         failure {
             script {
 
+                sh 'chmod 644 logs-docker.txt'
                 def logsBuild = readFile('logs-docker.txt') 
                 
                 slackSend (
