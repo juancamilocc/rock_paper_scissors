@@ -134,13 +134,8 @@ spec:
                 ]
             )   
         }
-        failure {
-            script {
-
-                sh 'chmod 644 logs-docker.txt'
-                def logsBuild = readFile('logs-docker.txt') 
-                
-                slackSend (
+        failure {           
+            slackSend (
                 channel: 'jenkins-notifications',
                 color: '#00FF00',
                 message: "Build of Rock Paper Scissors failed!",
@@ -160,9 +155,6 @@ spec:
                     ]
                 ]
             )
-
-            slackUploadFile(channel: 'jenkins-notifications', filePath: 'logs-docker.txt', initialComment: 'Logs Build')   
-            }
         }
     }
 }
