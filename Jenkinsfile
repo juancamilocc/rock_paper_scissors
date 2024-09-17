@@ -28,18 +28,19 @@ spec:
       volumeMounts:
         - name: docker-graph-storage
           mountPath: /var/lib/docker
+    - name: jnlp
+      image: jenkins/inbound-agent
+      resources:
+        limits:
+          memory: "1Gi"
+          cpu: "512m"
+        requests:
+          memory: "500Mi"
+          cpu: "256m"
   volumes:
     - name: docker-graph-storage
       emptyDir: {}
             """
-            containerTemplate {
-            name 'jnlp'
-            image 'jenkins/inbound-agent'
-            resourceRequestCpu '256m'
-            resourceRequestMemory '500Mi'
-            resourceLimitCpu '512m'
-            resourceLimitMemory '1000Mi'
-            }
         }
     }
     environment {
