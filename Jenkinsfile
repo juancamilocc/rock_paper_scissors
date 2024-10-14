@@ -61,7 +61,13 @@ spec:
                             try {
                                 sh 'git config --global --add safe.directory $WORKSPACE'
 
-                                withCredentials([usernamePassword(credentialsId: 'credentials-dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                                withCredentials([
+                                    usernamePassword(
+                                        credentialsId: 'credentials-dockerhub', 
+                                        usernameVariable: 'DOCKERHUB_USERNAME', 
+                                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                                    )
+                                ]) {
                                     sh '''
                                         echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin                      
                                         docker build -t juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging . 2> logs-docker.txt
@@ -85,7 +91,13 @@ spec:
                     script {
                         retry(RETRY_COUNTS) {
                             try {
-                                withCredentials([usernamePassword(credentialsId: 'credentials-github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                                withCredentials([
+                                    usernamePassword(
+                                        credentialsId: 'credentials-github', 
+                                        usernameVariable: 'GIT_USERNAME', 
+                                        passwordVariable: 'GIT_PASSWORD'
+                                    )
+                                ]) {
                                     sh '''
                                         git config --global user.email "jccoloradoc@uqvirtual.edu.co"
                                         git config --global user.name "juancamilocc"
@@ -114,7 +126,7 @@ spec:
     post {
         success {
             slackSend(
-                channel: 'jenkins-notifications',
+                channel: 'notifications',
                 color: '#00FF00',
                 message: "Build of Rock Paper Scissors was successful!",
                 attachments: [
@@ -137,7 +149,7 @@ spec:
         }
         failure {           
             slackSend (
-                channel: 'jenkins-notifications',
+                channel: 'notifications',
                 color: '#00FF00',
                 message: "Build of Rock Paper Scissors failed!",
                 attachments: [
