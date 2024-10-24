@@ -151,7 +151,7 @@ spec:
             slackSend (
                 channel: 'notifications',
                 color: '#00FF00',
-                message: "Build of Rock Paper Scissors failed!",
+                message: "Build of Rock Paper Scissors failed!!",
                 attachments: [
                     [
                         title: "Build of Rock Paper Scissors failed!",
