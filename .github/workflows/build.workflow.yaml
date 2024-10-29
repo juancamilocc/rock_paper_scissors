@@ -1,0 +1,29 @@
+name: Build Using Env Variables and Secrets
+
+on: push
+
+env:
+  IMAGE_NAME: rps-game
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Docker Login
+      run: docker login --username "${{ vars.DOCKER_USERNAME }}" --password "${{ secrets.DOCKER_PASSWORD }}"
+
+    - name: Docker Build
+      run: docker build -t "${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME  }}:latest" .
+
+    - name: Docker Publish
+      run: docker push "${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME  }}:latest"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+    steps:
+      - name: Docker Run
+        run: echo docker run -d -p 8085:8085 "${{ vars.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME  }}:latest"

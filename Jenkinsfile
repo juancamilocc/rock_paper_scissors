@@ -69,7 +69,7 @@ spec:
                                     )
                                 ]) {
                                     sh '''
-                                        echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin                      
+                                        docker login --username=$DOCKERHUB_USERNAME --password=$DOCKERHUB_PASSWORD                      
                                         docker build -t juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging .
                                         docker push juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging
                                     '''
