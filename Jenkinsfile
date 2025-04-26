@@ -63,7 +63,7 @@ spec:
 
                                 withCredentials([
                                     usernamePassword(
-                                        credentialsId: 'credentials-dockerhub', 
+                                        credentialsId: 'dockerhub-credentials', 
                                         usernameVariable: 'DOCKERHUB_USERNAME', 
                                         passwordVariable: 'DOCKERHUB_PASSWORD'
                                     )
@@ -93,7 +93,7 @@ spec:
                             try {
                                 withCredentials([
                                     usernamePassword(
-                                        credentialsId: 'credentials-github', 
+                                        credentialsId: 'github-credentials', 
                                         usernameVariable: 'GIT_USERNAME', 
                                         passwordVariable: 'GIT_PASSWORD'
                                     )
