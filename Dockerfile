@@ -9,7 +9,7 @@ COPY . .
 COPY templates/ templates/
 COPY static/ static/
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /rock_paper_scissors
+RUN CGO_ENABLED=0 GOOS=linux go build -buildvcs=false -o /rock_paper_scissors
 
 # Test stage
 FROM build-stage AS run-test-stage
