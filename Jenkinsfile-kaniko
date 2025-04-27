@@ -19,11 +19,11 @@ spec:
         privileged: true
       resources:
         limits:
-          memory: "2Gi"
+          memory: "1Gi"
           cpu: "750m"
         requests:
-          memory: "1Gi"
-          cpu: "500m"
+          memory: "500Mi"
+          cpu: "256m"
       volumeMounts:
         - name: kaniko-cache
           mountPath: /cache
