@@ -73,7 +73,7 @@ spec:
 
                                 sh '''
                                     /kaniko/executor --context=`pwd` \
-                                    --dockerfile=`pwd`/Dockerfile \
+                                    --dockerfile=Dockerfile \
                                     --destination=juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging \
                                     --cache=true \
                                     --cache-dir=/cache \
