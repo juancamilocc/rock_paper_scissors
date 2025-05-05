@@ -72,6 +72,8 @@ spec:
                                     --cache=true \
                                     --cache-repo='juancamiloccc/rps-game-cache' \
                                     --snapshot-mode=redo
+
+                                    exit $?
                                 '''
 
                                 echo "Kaniko build and push completed..."
