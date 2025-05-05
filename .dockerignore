@@ -1,0 +1,7 @@
+.git
+.gitignore
+Jenkinsfile
+Jenkinsfile-kaniko
+README.md
+*.log
+*.tmp
