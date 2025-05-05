@@ -16,6 +16,7 @@ spec:
       tty: true
       securityContext:
         runAsUser: 0
+        privileged: true
       resources:
         limits:
           memory: "1Gi"
@@ -71,7 +72,8 @@ spec:
                                     --destination=juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging \
                                     --cache=true \
                                     --cache-repo='juancamiloccc/rps-game-cache' \
-                                    --snapshot-mode=redo
+                                    --snapshot-mode=redo \
+                                    --verbosity=debug
                                 '''
 
                                 echo "Kaniko build and push completed..."
