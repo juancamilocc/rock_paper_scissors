@@ -66,15 +66,17 @@ spec:
                             try {
                                 sh 'git config --global --add safe.directory $WORKSPACE'
 
-                                sh '''
-                                    /kaniko/executor --context=`pwd` \
-                                    --dockerfile=`pwd`/Dockerfile \
-                                    --destination=juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging \
-                                    --cache=true \
-                                    --cache-repo='juancamiloccc/rps-game-cache' \
-                                    --snapshot-mode=redo \
-                                    --verbosity=debug
-                                '''
+                                def result = sh(
+                                    script: '''
+                                        /kaniko/executor --context=`pwd` \
+                                        --dockerfile=Dockerfile \
+                                        --destination=juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging \
+                                        --cache=true \
+                                        --cache-repo='juancamiloccc/rps-game-cache' \
+                                        --snapshot-mode=redo 
+                                    ''',
+                                    returnStatus: true
+                                )
 
                                 echo "Kaniko build and push completed..."
 
