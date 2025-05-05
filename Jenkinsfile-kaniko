@@ -79,6 +79,8 @@ spec:
                                     --cache-dir=/cache \
                                     --cache-repo='' \
                                     --snapshot-mode=redo
+
+                                    echo "Kaniko build and push completed..."
                                 '''
 
                             } catch (Exception e) {
