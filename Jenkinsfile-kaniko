@@ -69,7 +69,7 @@ spec:
                                 def result = sh(
                                     script: '''
                                         /kaniko/executor --context=`pwd` \
-                                        --dockerfile=Dockerfile \
+                                        --dockerfile=`pwd`/Dockerfile \
                                         --destination=juancamiloccc/rps-game:$IMAGE_TAG-$DATE-staging \
                                         --cache=true \
                                         --cache-repo='juancamiloccc/rps-game-cache' \
